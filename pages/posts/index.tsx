@@ -1,10 +1,8 @@
 import React, {
   Component,
   createContext,
-  createRef,
   FC,
   forwardRef,
-  lazy,
   MouseEvent,
   Profiler,
   PropsWithChildren,
@@ -20,6 +18,7 @@ import type {NextPage, GetStaticProps} from 'next'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import ReactDOM from 'react-dom'
+import Layout from '../../components/Layout'
 
 interface PostsProps {
   a: number
@@ -355,9 +354,9 @@ class RefButton extends Component<PropsWithChildren> {
 }
 
 const TestRef = () => {
-  const tagRef = createRef<HTMLButtonElement>()
-  const instanceRef = createRef<RefButton>() // NOT allowed for functional components
-  const forwardedRef = createRef<HTMLButtonElement>()
+  const tagRef = useRef<HTMLButtonElement>()
+  const instanceRef = useRef<RefButton>() // NOT allowed for functional components
+  const forwardedRef = useRef<HTMLButtonElement>()
 
   console.log({
     tagRef,
@@ -473,6 +472,7 @@ class MouseTracker extends React.Component<
 const Posts: NextPage<PostsProps> = ({a}) => {
   return (
     <React.StrictMode>
+      <Layout />
       <SomeContext.Provider value={{someProp: 2}}>
         Posts
         {a}
